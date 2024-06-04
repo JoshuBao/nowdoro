@@ -5,6 +5,7 @@ import AuthenticatedLayout from '@/components/AuthenticatedLayout';
 import AddTaskForm from '@/components/AddTaskForm';
 import TaskListItem from '@/components/TaskListItem';
 import { useTasks } from '@/context/TaskContext';
+import Link from 'next/link';
 
 const Dashboard: React.FC = () => {
   const { tasks } = useTasks();
@@ -24,6 +25,7 @@ const Dashboard: React.FC = () => {
             <TaskListItem key={task.id} task={task} />
           ))}
         </div>
+        <Link href="/dashboard/tasks" className="btn btn-primary mt-4">Manage Tasks</Link>
       </div>
     </AuthenticatedLayout>
   );

@@ -24,8 +24,10 @@ const AddTaskForm: React.FC = () => {
   return (
     <form onSubmit={handleSubmit} className="mb-4">
       <div className="mb-2">
-        <label className="block text-sm font-bold mb-1">Task Name</label>
+        <label htmlFor="task-name" className="block text-sm font-bold mb-1">Task Name</label>
         <input
+          id="task-name"
+          name="task-name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -34,8 +36,10 @@ const AddTaskForm: React.FC = () => {
         />
       </div>
       <div className="mb-2">
-        <label className="block text-sm font-bold mb-1">Task Description</label>
+        <label htmlFor="task-description" className="block text-sm font-bold mb-1">Task Description</label>
         <textarea
+          id="task-description"
+          name="task-description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="textarea textarea-bordered w-full"

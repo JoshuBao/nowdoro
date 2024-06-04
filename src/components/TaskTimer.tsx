@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface TaskTimerProps {
   taskId: string;
@@ -11,18 +11,24 @@ interface TaskTimerProps {
 const TaskTimer: React.FC<TaskTimerProps> = ({ taskId, initialTime, onUpdate }) => {
   const [time, setTime] = useState(initialTime);
   const [running, setRunning] = useState(false);
+  const prevTimeRef = useRef(time);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (running) {
-      timer = setInterval(() => setTime(prev => prev + 1), 1000);
+      timer = setInterval(() => {
+        setTime(prev => prev + 1);
+      }, 1000);
     }
     return () => clearInterval(timer);
   }, [running]);
 
   useEffect(() => {
-    onUpdate(taskId, time);
-  }, [time, onUpdate, taskId]);
+    if (prevTimeRef.current !== time) {
+      onUpdate(taskId, time);
+      prevTimeRef.current = time;
+    }
+  }, [time, taskId, onUpdate]);
 
   return (
     <div>
