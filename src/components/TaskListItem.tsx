@@ -10,15 +10,12 @@ interface TaskListItemProps {
     name: string;
     description: string;
     elapsedTime: number;
+    isRunning: boolean;
   };
 }
 
 const TaskListItem: React.FC<TaskListItemProps> = ({ task }) => {
-  const { updateTask, deleteTask } = useTasks();
-
-  const handleUpdate = (id: string, elapsedTime: number) => {
-    updateTask({ ...task, elapsedTime });
-  };
+  const { deleteTask } = useTasks();
 
   return (
     <div className="card shadow-lg compact bg-base-100 p-4 mb-4">
@@ -26,7 +23,7 @@ const TaskListItem: React.FC<TaskListItemProps> = ({ task }) => {
         <div>
           <h2 className="card-title">{task.name}</h2>
           <p className="text-sm text-gray-500">{task.description}</p>
-          <TaskTimer taskId={task.id} initialTime={task.elapsedTime} onUpdate={handleUpdate} />
+          <TaskTimer taskId={task.id} initialTime={task.elapsedTime} isRunning={task.isRunning} />
         </div>
         <button className="btn btn-error btn-sm" onClick={() => deleteTask(task.id)}>Delete</button>
       </div>
