@@ -15,6 +15,7 @@ const AddTaskForm: React.FC = () => {
       name,
       description,
       elapsedTime: 0,
+      isRunning: false, 
     };
     addTask(newTask);
     setName('');

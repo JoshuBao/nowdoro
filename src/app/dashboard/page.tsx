@@ -19,7 +19,6 @@ const Dashboard: React.FC = () => {
           <p>Total Tasks: {tasks.length}</p>
           <p>Total Time Spent: {new Date(tasks.reduce((acc, task) => acc + task.elapsedTime, 0) * 1000).toISOString().substr(11, 8)}</p>
         </div>
-        <AddTaskForm />
         <div className="mt-4 space-y-4">
           {tasks.map(task => (
             <TaskListItem key={task.id} task={task} />

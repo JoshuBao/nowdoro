@@ -19,7 +19,7 @@ const TaskTimer: React.FC<TaskTimerProps> = ({ taskId, initialTime, isRunning })
         <button className="btn btn-primary mr-2" onClick={() => toggleTaskRunning(taskId)}>
           {isRunning ? 'Pause' : 'Start'}
         </button>
-        <button className="btn btn-secondary" onClick={() => updateTask({ id: taskId, elapsedTime: 0, isRunning: false })}>
+        <button className="btn btn-secondary" onClick={() => updateTask({ id: taskId, elapsedTime: 0, isRunning: false, name: '', description: '' })}>
           Reset
         </button>
       </div>
