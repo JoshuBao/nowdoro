@@ -1,21 +1,19 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
-import LandingPage from '@/components/LandingPage';
+import React from 'react';
+import Link from 'next/link';
+import UnauthenticatedLayout from '@/components/UnauthenticatedLayout';
 
-const Home: React.FC = () => {
-  const router = useRouter();
-  const { data: session, status } = useSession();
-
-  useEffect(() => {
-    if (status === 'authenticated') {
-      router.push('/dashboard');
-    }
-  }, [status, router]);
-
-  return <LandingPage />;
+const LandingPage: React.FC = () => {
+  return (
+    <UnauthenticatedLayout>
+      <div className="text-center">
+        <h1 className="text-4xl font-bold mb-4">Welcome to Task Time Tracker</h1>
+        <p className="text-lg mb-4">Track your tasks and manage your time efficiently.</p>
+        <Link href="/dashboard" className="btn btn-primary">Go to Dashboard</Link>
+      </div>
+    </UnauthenticatedLayout>
+  );
 };
 
-export default Home;
+export default LandingPage;

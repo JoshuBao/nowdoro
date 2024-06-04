@@ -19,9 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <TaskProvider>
-
           {children}
-
         </TaskProvider>
       </body>
     </html>
