@@ -14,7 +14,7 @@ const Header: React.FC = () => {
         <nav className="flex items-center">
           <Link href="/dashboard" className="btn btn-sm mr-2">Dashboard</Link>
           <Link href="/dashboard/tasks" className="btn btn-sm btn-primary mr-2">Tasks</Link>
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
         </nav>
       </div>
     </header>
