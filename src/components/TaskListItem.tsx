@@ -21,8 +21,8 @@ const TaskListItem: React.FC<TaskListItemProps> = ({ task }) => {
     <div className="card shadow-lg compact bg-base-100 p-4 mb-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="card-title">{task.name}</h2>
-          <p className="text-sm text-gray-500">{task.description}</p>
+          <h2 className="card-title text-primary">{task.name}</h2>
+          <p className="text-sm text-secondary">{task.description}</p>
           <TaskTimer taskId={task.id} initialTime={task.elapsedTime} isRunning={task.isRunning} />
         </div>
         <button className="btn btn-error btn-sm" onClick={() => deleteTask(task.id)}>Delete</button>

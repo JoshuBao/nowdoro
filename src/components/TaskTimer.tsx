@@ -14,7 +14,7 @@ const TaskTimer: React.FC<TaskTimerProps> = ({ taskId, initialTime, isRunning })
 
   return (
     <div>
-      <div className="text-2xl font-mono">{new Date(initialTime * 1000).toISOString().substr(11, 8)}</div>
+      <div className="text-2xl text-neutral font-mono">{new Date(initialTime * 1000).toISOString().substr(11, 8)}</div>
       <div className="mt-2">
         <button className="btn btn-primary mr-2" onClick={() => toggleTaskRunning(taskId)}>
           {isRunning ? 'Pause' : 'Start'}

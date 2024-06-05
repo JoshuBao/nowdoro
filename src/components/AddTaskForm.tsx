@@ -23,27 +23,27 @@ const AddTaskForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
-      <div className="mb-2">
-        <label htmlFor="task-name" className="block text-sm font-bold mb-1">Task Name</label>
+    <form onSubmit={handleSubmit} className="mb-4 bg-base-100 p-6 rounded-lg shadow-lg">
+      <div className="mb-4">
+        <label htmlFor="task-name" className="block text-neutral text-sm font-bold mb-2">Task Name</label>
         <input
           id="task-name"
           name="task-name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="input input-bordered w-full"
+          className="input input-bordered w-full bg-neutral text-neutral-content"
           required
         />
       </div>
-      <div className="mb-2">
-        <label htmlFor="task-description" className="block text-sm font-bold mb-1">Task Description</label>
+      <div className="mb-4">
+        <label htmlFor="task-description" className="block text-neutral text-sm font-bold mb-2">Task Description</label>
         <textarea
           id="task-description"
           name="task-description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="textarea textarea-bordered w-full"
+          className="textarea textarea-bordered w-full bg-neutral text-neutral-content"
           required
         />
       </div>

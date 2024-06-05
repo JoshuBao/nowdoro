@@ -32,7 +32,8 @@ const config = {
         },
       },
       "light", 
-      "dark"
+      "dark",
+      "nord",
     ],
   },
 };

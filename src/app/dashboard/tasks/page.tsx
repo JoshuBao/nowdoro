@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import AuthenticatedLayout from '@/components/AuthenticatedLayout';
 import AddTaskForm from '@/components/AddTaskForm';
 import TaskListItem from '@/components/TaskListItem';
 import { useTasks } from '@/context/TaskContext';
@@ -11,9 +10,8 @@ const Tasks: React.FC = () => {
   const { tasks } = useTasks();
 
   return (
-    <AuthenticatedLayout>
       <div className="min-h-screen flex flex-col p-4">
-        <h1 className="text-3xl font-bold mb-4">Tasks</h1>
+        <h1 className="text-3xl text-neutral font-bold mb-4">Tasks</h1>
         <AddTaskForm />
         <div className="mt-4 space-y-4">
           {tasks.map(task => (
@@ -22,7 +20,6 @@ const Tasks: React.FC = () => {
         </div>
         <Link href="/dashboard" className="btn btn-secondary mt-4">Back to Dashboard</Link>
       </div>
-    </AuthenticatedLayout>
   );
 };
 

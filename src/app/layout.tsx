@@ -1,8 +1,8 @@
-// No text nodes or whitespace between tags
-import React from 'react';
+// src/app/layout.tsx
 import { Inter } from 'next/font/google';
 import { TaskProvider } from '@/context/TaskContext';
 import './globals.css';
+import Header from '@/components/Header';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -17,9 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="mytheme">
+    <html lang="en" data-theme="nord">
       <body className={`${inter.className} bg-base-100`}>
         <TaskProvider>
+          <Header />
           {children}
         </TaskProvider>
       </body>
