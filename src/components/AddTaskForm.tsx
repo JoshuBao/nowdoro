@@ -11,7 +11,7 @@ const AddTaskForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const newTask = {
-      id: Math.random().toString(36).substr(2, 9),
+      id: Math.random().toString(36).substring(2, 9),
       name,
       description,
       elapsedTime: 0,

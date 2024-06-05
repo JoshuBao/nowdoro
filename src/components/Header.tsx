@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const Header: React.FC = () => {
   return (
@@ -10,9 +11,10 @@ const Header: React.FC = () => {
         <h1 className="text-xl font-bold">
           <Link href="/">Task Time Tracker</Link>
         </h1>
-        <nav>
-          <Link href="/dashboard" className="btn btn-sm">Dashboard</Link>
-          <Link href="/dashboard/tasks" className="btn btn-sm btn-primary ml-2">Tasks</Link>
+        <nav className="flex items-center">
+          <Link href="/dashboard" className="btn btn-sm mr-2">Dashboard</Link>
+          <Link href="/dashboard/tasks" className="btn btn-sm btn-primary mr-2">Tasks</Link>
+          <ThemeToggle />
         </nav>
       </div>
     </header>

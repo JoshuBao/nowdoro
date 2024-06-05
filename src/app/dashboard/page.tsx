@@ -2,7 +2,6 @@
 
 import React from 'react';
 import AuthenticatedLayout from '@/components/AuthenticatedLayout';
-import AddTaskForm from '@/components/AddTaskForm';
 import TaskListItem from '@/components/TaskListItem';
 import { useTasks } from '@/context/TaskContext';
 import Link from 'next/link';
@@ -10,16 +9,28 @@ import Link from 'next/link';
 const Dashboard: React.FC = () => {
   const { tasks } = useTasks();
 
+  const totalTasks = tasks.length;
+  const totalTimeSpent = tasks.reduce((acc, task) => acc + task.elapsedTime, 0);
+
   return (
     <AuthenticatedLayout>
       <div className="min-h-screen flex flex-col p-4">
         <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
         <div className="mb-4">
-          <h2 className="text-xl font-semibold">Summary</h2>
-          <p>Total Tasks: {tasks.length}</p>
-          <p>Total Time Spent: {new Date(tasks.reduce((acc, task) => acc + task.elapsedTime, 0) * 1000).toISOString().substr(11, 8)}</p>
+          <h2 className="text-xl font-semibold mb-4">Summary</h2>
+          <div className="stats shadow">
+            <div className="stat">
+              <div className="stat-title">Total Tasks</div>
+              <div className="stat-value">{totalTasks}</div>
+            </div>
+            <div className="stat">
+              <div className="stat-title">Total Time Spent</div>
+              <div className="stat-value">{new Date(totalTimeSpent * 1000).toISOString().substr(11, 8)}</div>
+            </div>
+          </div>
         </div>
         <div className="mt-4 space-y-4">
+        <h2 className="text-xl font-semibold mb-4">Tasks</h2>
           {tasks.map(task => (
             <TaskListItem key={task.id} task={task} />
           ))}
