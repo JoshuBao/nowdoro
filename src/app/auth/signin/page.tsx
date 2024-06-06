@@ -12,13 +12,14 @@ export default function SignInPage() {
   const supabase = createClient();
 
   useEffect(() => {
-    const getUser = setInterval(async () => {
-      const { data: { session }} = await supabase.auth.getSession();
+    const fetchUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        window.location.href = 'dashboard';
+        window.location.href = '/dashboard';
       }
-    }, 2000);
-    return () => clearInterval(getUser);
+    };
+
+    fetchUser();
   }, []);
 
   const handleMagicLink = async (e: React.FormEvent) => {
