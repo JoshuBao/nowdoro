@@ -19,6 +19,7 @@ export default async function RootLayout({
   return (
     <html lang="en" data-theme="nord">
       <body className={`${inter.className} bg-base-100`}>
+        <Header />
         <TaskProvider>
           {children}
         </TaskProvider>

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { User } from '@supabase/supabase-js';
 import SignOutButton from '@/components/SignOutButton';
+import TaskList from '@/components/TaskList';
 
 export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
@@ -25,11 +26,11 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200">
-
+    <div className="min-h-screen flex flex-col items-center">
+      <TaskList />
       {user ? (
         <div>
-          <div className="text-center">
+          <div className="text-center flex flex-col items-center">
             <h2 className="text-lg text-black">Welcome, {user?.email}</h2>
             <SignOutButton />
           </div>

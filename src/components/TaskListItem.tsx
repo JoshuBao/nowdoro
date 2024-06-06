@@ -18,7 +18,7 @@ const TaskListItem: React.FC<TaskListItemProps> = ({ task }) => {
   const { deleteTask } = useTasks();
 
   return (
-    <div className="card shadow-lg compact bg-base-100 p-4 mb-4">
+    <div className="card shadow-lg compact bg-base-100 p-4">
       <div className="flex items-center justify-between">
         <div>
           <h2 className="card-title text-primary">{task.name}</h2>

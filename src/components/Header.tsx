@@ -4,9 +4,10 @@
 import React from 'react';
 import Link from 'next/link';
 import ThemeToggle from '@/components/ThemeToggle';
-import { supabase } from '@/utils/supabase/client';
+import { createClient } from '@/utils/supabase/client';
 
-const Header: React.FC<{ user: any }> = ({ user }) => {
+const Header: React.FC<{}> = () => {
+  const supabase = createClient();
   const handleLogout = async () => {
     await supabase.auth.signOut();
     window.location.href = '/auth/signin';
@@ -19,18 +20,8 @@ const Header: React.FC<{ user: any }> = ({ user }) => {
           <Link href="/">Task Time Tracker</Link>
         </h1>
         <nav className="flex items-center">
-          {user ? (
-            <>
-              <Link href="/dashboard" className="btn btn-sm mr-2">Dashboard</Link>
-              <Link href="/dashboard/tasks" className="btn btn-sm btn-primary mr-2">Tasks</Link>
-              <span className="mr-4">Welcome, {user.email}</span>
-              <button onClick={handleLogout} className="btn btn-secondary">
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link href="/auth/signin" className="btn btn-primary">Sign In</Link>
-          )}
+          <Link href="/dashboard" className="btn btn-sm mr-2">Dashboard</Link>
+          <Link href="/dashboard/tasks" className="btn btn-sm btn-primary mr-2">Tasks</Link>
         </nav>
       </div>
     </header>
