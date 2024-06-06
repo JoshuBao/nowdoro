@@ -18,7 +18,6 @@ export default function SignInPage() {
         window.location.href = '/dashboard';
       }
     };
-
     fetchUser();
   }, []);
 

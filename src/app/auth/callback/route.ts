@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
 
     console.log('User logged in:', data);
 
-    return NextResponse.redirect(new URL(`/${from}` || '/dashboard', request.url));
+    return NextResponse.redirect(new URL('/dashboard', request.url));
   } else {
     return NextResponse.redirect(new URL('/error', request.url));
   }
