@@ -20,7 +20,6 @@ export default function RootLayout({
     <html lang="en" data-theme="nord">
       <body className={`${inter.className} bg-base-100`}>
         <TaskProvider>
-          <Header />
           {children}
         </TaskProvider>
       </body>

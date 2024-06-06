@@ -1,40 +1,42 @@
+// src/app/dashboard/page.tsx
 'use client';
 
-import React from 'react';
-import TaskListItem from '@/components/TaskListItem';
-import { useTasks } from '@/context/TaskContext';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/utils/supabase/client';
+import { User } from '@supabase/supabase-js';
 
-const Dashboard: React.FC = () => {
-  const { tasks } = useTasks();
+export default function DashboardPage() {
+  const [user, setUser] = useState<User | null>(null);
+  
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: {user}, error } = await supabase.auth.getUser();
+      if (error) {
+        console.error('Error fetching user:', error);
+      } else {
+        console.log('User:', user);
+        setUser(user || null);
+      }
+    };
 
-  const totalTasks = tasks.length;
-  const totalTimeSpent = tasks.reduce((acc, task) => acc + task.elapsedTime, 0);
+    fetchUser();
+  }, []);
 
   return (
-      <div className="min-h-screen flex flex-col p-4">
-        <div className="mb-4">
-          <h2 className="text-xl text-neutral font-semibold mb-4">Summary</h2>
-          <div className="stats shadow">
-            <div className="stat">
-              <div className="stat-title">Total Tasks</div>
-              <div className="stat-value">{totalTasks}</div>
-            </div>
-            <div className="stat">
-              <div className="stat-title">Total Time Spent</div>
-              <div className="stat-value">{new Date(totalTimeSpent * 1000).toISOString().substr(11, 8)}</div>
+    <div className="min-h-screen flex items-center justify-center bg-base-200">
+      <div className="w-full max-w-md p-8 space-y-6 bg-base-100 rounded-lg shadow-lg">
+        {user ? (
+          <div>
+            <div className="text-center">
+              <p className="text-lg">Welcome, {user.email}</p>
             </div>
           </div>
-        </div>
-        <div className="mt-4 space-y-4">
-        <h2 className="text-xl text-neutral font-semibold mb-4">Tasks</h2>
-          {tasks.map(task => (
-            <TaskListItem key={task.id} task={task} />
-          ))}
-        </div>
-        <Link href="/dashboard/tasks" className="btn btn-primary mt-4">Manage Tasks</Link>
+        ) : (
+          <div className="text-center">
+            <p className="text-lg">Loading...</p>
+          </div>
+        )}
       </div>
+    </div>
   );
-};
-
-export default Dashboard;
+}
