@@ -10,7 +10,15 @@ interface TaskTimerProps {
 }
 
 const TaskTimer: React.FC<TaskTimerProps> = ({ taskId, initialTime, isRunning }) => {
-  const { toggleTaskRunning, updateTask } = useTasks();
+  const { toggleTaskRunning, updateTask, tasks } = useTasks();
+
+  const task = tasks.find(task => task.id === taskId);
+
+  const resetTask = () => {
+    if (task) {
+      updateTask({ ...task, elapsedTime: 0, isRunning: false });
+    }
+  };
 
   return (
     <div>
@@ -19,7 +27,7 @@ const TaskTimer: React.FC<TaskTimerProps> = ({ taskId, initialTime, isRunning })
         <button className="btn btn-primary mr-2" onClick={() => toggleTaskRunning(taskId)}>
           {isRunning ? 'Pause' : 'Start'}
         </button>
-        <button className="btn btn-secondary" onClick={() => updateTask({ id: taskId, elapsedTime: 0, isRunning: false, name: '', description: '' })}>
+        <button className="btn btn-secondary" onClick={resetTask}>
           Reset
         </button>
       </div>
