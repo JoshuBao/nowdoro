@@ -5,9 +5,11 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const token_hash = searchParams.get('token_hash');
   const type = searchParams.get('type') as 'magiclink';
+  const from = searchParams.get('from');
+
+  const supabase = createClient();
 
   if (token_hash && type) {
-    const supabase = createClient();
 
     console.log('Token Hash:', token_hash);
     console.log('Type:', type);
@@ -21,8 +23,13 @@ export async function GET(request: NextRequest) {
 
     console.log('User logged in:', data);
 
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+    return NextResponse.redirect(new URL(`/${from}` || '/dashboard', request.url));
   } else {
     return NextResponse.redirect(new URL('/error', request.url));
   }
 }
+
+
+
+
+

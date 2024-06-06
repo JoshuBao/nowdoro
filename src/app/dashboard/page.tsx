@@ -1,42 +1,47 @@
 // src/app/dashboard/page.tsx
-'use client';
+"use client";
 
 import { useEffect, useState } from 'react';
-import { supabase } from '@/utils/supabase/client';
+import { createClient } from '@/utils/supabase/client';
 import { User } from '@supabase/supabase-js';
+import SignOutButton from '@/components/SignOutButton';
 
 export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
-  
+
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data: {user}, error } = await supabase.auth.getUser();
-      if (error) {
-        console.error('Error fetching user:', error);
+    const getUser = async () => {
+      const supabase = createClient();
+      const { data } = await supabase.auth.getSession();
+      console.log('data', data);
+
+      if (data?.session) {
+        setUser(data?.session?.user || null);
       } else {
-        console.log('User:', user);
-        setUser(user || null);
+        window.location.href = "/auth/signin";
       }
     };
-
-    fetchUser();
+    getUser();
   }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200">
-      <div className="w-full max-w-md p-8 space-y-6 bg-base-100 rounded-lg shadow-lg">
-        {user ? (
-          <div>
-            <div className="text-center">
-              <p className="text-lg">Welcome, {user.email}</p>
-            </div>
-          </div>
-        ) : (
+
+      {user ? (
+        <div>
           <div className="text-center">
-            <p className="text-lg">Loading...</p>
+            <h2 className="text-lg text-black">Welcome, {user?.email}</h2>
+            {/* <SignOutButton /> */}
           </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="text-center">
+          <p className="text-lg text-neutral">Loading...</p>
+        </div>
+      )}
     </div>
   );
 }
+
+
+

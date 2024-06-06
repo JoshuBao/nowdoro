@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import { TaskProvider } from '@/context/TaskContext';
 import './globals.css';
 import Header from '@/components/Header';
-
+import { createClient } from '../../test/my-app/utils/supabase/server';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
@@ -11,7 +11,7 @@ export const metadata = {
   description: 'Manage your tasks efficiently',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;

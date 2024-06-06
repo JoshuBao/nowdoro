@@ -1,18 +1,33 @@
 'use client';
 
-import React, { useState } from 'react';
-import { supabase } from '@/utils/supabase/client';
+import React, { useEffect, useState } from 'react';
+import { createClient } from '@/utils/supabase/client';
 
 export default function SignInPage() {
   const [emailSent, setEmailSent] = useState(false);
   const [email, setEmail] = useState('');
 
+  const [data, setData] = useState<any>(null);
+
+  const supabase = createClient();
+
+  useEffect(() => {
+    const getUser = setInterval(async () => {
+      const { data: { session }} = await supabase.auth.getSession();
+      if (session) {
+        window.location.href = 'dashboard';
+      }
+    }, 2000);
+    return () => clearInterval(getUser);
+  }, []);
+
   const handleMagicLink = async (e: React.FormEvent) => {
     e.preventDefault();
+    const supabase = createClient();
     const { data, error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: 'http://localhost:3000/auth/callback',
+        emailRedirectTo: `http://localhost:3000/auth/callback`,
       },
     });
 
@@ -60,3 +75,5 @@ export default function SignInPage() {
     </div>
   );
 }
+
+
