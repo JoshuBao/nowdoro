@@ -1,34 +1,33 @@
-
 import { createClient } from "@/utils/supabase/client";
-import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default async function SignOutButton() {
-  const supabase = createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const signOut = async () => {
-
+export default function SignOutButton() {
     const supabase = createClient();
-    await supabase.auth.signOut();
-    return redirect("/auth/signin");
-  };
+    const router = useRouter();
+    const [isMounted, setIsMounted] = useState(false);
 
-  return user ? (
-    <div className="flex items-center gap-4">
-      Hey, {user.email}!
-      <form action={signOut}>
-        <button type="submit" className="btn btn-secondary">
-          SignOut
-        </button>
-      </form>
-    </div>
-  ) : (
-    <Link href="/login" className="btn btn-primary">
-      Login
-    </Link>
-  );
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    const signOut = async (event: React.FormEvent) => {
+        event.preventDefault();
+        await supabase.auth.signOut();
+        router.push("/auth/signin");
+    };
+
+    if (!isMounted) {
+        return null;
+    }
+
+    return (
+        <div className="flex items-center gap-4">
+            <form onSubmit={signOut}>
+                <button type="submit" className="btn btn-secondary">
+                    SignOut
+                </button>
+            </form>
+        </div>
+    );
 }

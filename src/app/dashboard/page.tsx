@@ -31,7 +31,7 @@ export default function DashboardPage() {
         <div>
           <div className="text-center">
             <h2 className="text-lg text-black">Welcome, {user?.email}</h2>
-            {/* <SignOutButton /> */}
+            <SignOutButton />
           </div>
         </div>
       ) : (
