@@ -47,13 +47,13 @@ const WorkLog: React.FC = () => {
     }, [setTasks]);
 
     return (
-        <div className="p-4">
-            <h2 className="text-2xl font-bold text-primary mb-4">Work Log for Today</h2>
+        <div className="p-4 w-1/5">
+            <h2 className="text-2xl font-bold text-primary mb-4">Today's Work Log</h2>
             <div className="flex text-secondary flex-col">
                 {taskSessions.map((session) => (
                     <div key={session.id} className="mb-4">
                         <div className="flex items-center space-x-4">
-                            <div className="flex-grow bg-base-200 p-4 rounded-lg shadow">
+                            <div className="flex-grow bg-base-300 p-4 rounded-lg shadow">
                                 <h3 className="font-bold text-lg">{session.task.name}</h3>
                                 <p className="text-md">{session.task.description}</p>
                                 <p className="text-sm text-neutral">{`${format(new Date(session.start_time), 'hh:mm a')} To: ${session.end_time ? format(new Date(session.end_time), 'hh:mm a') : 'Ongoing'}`}</p>

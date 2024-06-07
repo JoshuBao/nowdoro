@@ -28,11 +28,19 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between">
-      <TaskList />
-      <BreakComponent />
+    <div className="min-h-screen flex flex-row justify-between">
       <WorkLog />
-      {user ? (
+      <div className="flex flex-col items-center">
+        <TaskList />
+      </div>
+      <BreakComponent />
+    </div>
+  )
+}
+
+
+
+{/* {user ? (
         <div>
           <div className="text-center flex flex-col items-center">
             <h2 className="text-lg text-black">Welcome, {user?.email}</h2>
@@ -43,10 +51,4 @@ export default function DashboardPage() {
         <div className="text-center">
           <p className="text-lg text-neutral">Loading...</p>
         </div>
-      )}
-    </div>
-  )
-}
-
-
-
+      )} */}
