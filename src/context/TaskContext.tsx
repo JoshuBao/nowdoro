@@ -66,14 +66,14 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const updateTask = async (updatedTask: Task) => {
     const data = await supabaseUpdateTask(updatedTask);
-    setTasks((prevTasks) => 
+    setTasks((prevTasks) =>
       prevTasks.map(task => task.id === updatedTask.id ? data : task)
     );
   };
 
   const deleteTask = async (id: string) => {
     await supabaseDeleteTask(id);
-    setTasks((prevTasks) => 
+    setTasks((prevTasks) =>
       prevTasks.filter(task => task.id !== id)
     );
   };
@@ -90,17 +90,28 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const endTaskSession = async (sessionId: string) => {
     const data = await supabaseEndTaskSession(sessionId);
-    setTaskSessions((prevSessions) => 
+    setTaskSessions((prevSessions) =>
       prevSessions.map(session => session.id === sessionId ? data : session)
     );
   };
 
-  const toggleTaskRunning = (taskId: string) => {
+  const toggleTaskRunning = async (taskId: string) => {
     setTasks((prevTasks) =>
       prevTasks.map(task =>
         task.id === taskId ? { ...task, isRunning: !task.isRunning } : task
       )
     );
+
+    const task = tasks.find(task => task.id === taskId);
+
+    if (task?.isRunning) {
+      const activeSession = taskSessions.find(session => session.task_id === taskId && !session.end_time);
+      if (activeSession) {
+        await endTaskSession(activeSession.id);
+      }
+    } else {
+      await startTaskSession(taskId);
+    }
   };
 
   // Effect to handle running timers
@@ -118,7 +129,7 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, []);
 
   return (
-    <TaskContext.Provider value={{ tasks, setTasks, taskSessions, addTask, updateTask, deleteTask, startTaskSession, endTaskSession, toggleTaskRunning, isOnBreak: false, breakTime: 0, startBreak: () => {}, endBreak: () => {} }}>
+    <TaskContext.Provider value={{ tasks, setTasks, taskSessions, addTask, updateTask, deleteTask, startTaskSession, endTaskSession, toggleTaskRunning, isOnBreak: false, breakTime: 0, startBreak: () => { }, endBreak: () => { } }}>
       {children}
     </TaskContext.Provider>
   );

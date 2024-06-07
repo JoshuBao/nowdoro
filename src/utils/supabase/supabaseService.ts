@@ -23,7 +23,7 @@ export const addTask = async (task: Omit<Task, 'id' | 'user_id'>, userId: string
 
   if (error) {
     console.error('Error adding task:', error);
-  } 
+  }
   return data;
 };
 
@@ -37,7 +37,7 @@ export const updateTask = async (updatedTask: Task) => {
 
   if (error) {
     console.error('Error updating task:', error);
-  } 
+  }
   return data;
 };
 
@@ -49,7 +49,7 @@ export const deleteTask = async (id: string) => {
 
   if (error) {
     console.error('Error deleting task:', error);
-  } 
+  }
 };
 
 export const startTaskSession = async (taskId: string, userId: string) => {
@@ -60,6 +60,7 @@ export const startTaskSession = async (taskId: string, userId: string) => {
     start_time: new Date().toISOString(),
     end_time: null,
   };
+  console.log(`Starting task session for task ${taskId} and user ${userId}`);
 
   const { data, error } = await supabase
     .from('task_sessions')
@@ -69,7 +70,7 @@ export const startTaskSession = async (taskId: string, userId: string) => {
 
   if (error) {
     console.error('Error starting task session:', error);
-  } 
+  }
   return data;
 };
 
@@ -83,7 +84,7 @@ export const endTaskSession = async (sessionId: string) => {
 
   if (error) {
     console.error('Error ending task session:', error);
-  } 
+  }
   return data;
 };
 
@@ -107,9 +108,10 @@ export const fetchTasks = async (userId: string): Promise<Task[]> => {
 
   if (error) {
     console.error('Error fetching tasks:', error);
-  } 
+  }
   return data ?? [];
 };
+
 export const fetchTodayTaskSessions = async (userId: string) => {
   const start = formatISO(startOfDay(new Date()));
   const end = formatISO(endOfDay(new Date()));
@@ -118,7 +120,7 @@ export const fetchTodayTaskSessions = async (userId: string) => {
     .from('task_sessions')
     .select(`
       *,
-      task:tasks!inner(*)
+      task:tasks(*)
     `)
     .eq('user_id', userId)
     .gte('start_time', start)
@@ -129,4 +131,15 @@ export const fetchTodayTaskSessions = async (userId: string) => {
     console.error('Error fetching today task sessions:', error);
   }
   return data ?? [];
+};
+export const subscribeToTaskSessions = (userId: string, callback: (newSession: TaskSession) => void) => {
+  const channel = supabase
+    .channel(`public:task_sessions:user_id=eq.${userId}`)
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'task_sessions', filter: `user_id=eq.${userId}` }, (payload) => {
+      const newSession: TaskSession = payload.new as TaskSession;
+      callback(newSession);
+    })
+    .subscribe();
+
+  return channel;
 };
