@@ -7,6 +7,7 @@ import { User } from '@supabase/supabase-js';
 import SignOutButton from '@/components/SignOutButton';
 import TaskList from '@/components/TaskList';
 import BreakComponent from '@/components/BreakComponent';
+import WorkLog from '@/components/WorkLog';
 
 export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
@@ -30,6 +31,7 @@ export default function DashboardPage() {
     <div className="min-h-screen flex flex-col items-center justify-between">
       <TaskList />
       <BreakComponent />
+      <WorkLog />
       {user ? (
         <div>
           <div className="text-center flex flex-col items-center">

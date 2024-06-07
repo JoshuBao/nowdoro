@@ -14,4 +14,5 @@ export interface TaskSession {
     user_id: string;
     start_time: string;
     end_time: string | null;
+    task?: Task;
 }

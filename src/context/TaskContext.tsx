@@ -1,3 +1,4 @@
+// src/context/TaskContext.tsx
 'use client';
 
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
@@ -9,6 +10,7 @@ const supabase = createClient();
 
 interface TaskContextType {
   tasks: Task[];
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
   taskSessions: TaskSession[];
   addTask: (task: Omit<Task, 'id' | 'user_id'>) => void;
   updateTask: (task: Task) => void;
@@ -93,23 +95,12 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     );
   };
 
-  const toggleTaskRunning = async (taskId: string) => {
+  const toggleTaskRunning = (taskId: string) => {
     setTasks((prevTasks) =>
       prevTasks.map(task =>
         task.id === taskId ? { ...task, isRunning: !task.isRunning } : task
       )
     );
-
-    const task = tasks.find(task => task.id === taskId);
-
-    if (task?.isRunning) {
-      const activeSession = taskSessions.find(session => session.task_id === taskId && !session.end_time);
-      if (activeSession) {
-        await endTaskSession(activeSession.id);
-      }
-    } else {
-      await startTaskSession(taskId);
-    }
   };
 
   // Effect to handle running timers
@@ -127,7 +118,7 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, []);
 
   return (
-    <TaskContext.Provider value={{ tasks, taskSessions, addTask, updateTask, deleteTask, startTaskSession, endTaskSession, toggleTaskRunning, isOnBreak: false, breakTime: 0, startBreak: () => {}, endBreak: () => {} }}>
+    <TaskContext.Provider value={{ tasks, setTasks, taskSessions, addTask, updateTask, deleteTask, startTaskSession, endTaskSession, toggleTaskRunning, isOnBreak: false, breakTime: 0, startBreak: () => {}, endBreak: () => {} }}>
       {children}
     </TaskContext.Provider>
   );

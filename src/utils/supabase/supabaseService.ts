@@ -2,6 +2,7 @@
 import { createClient } from '@/utils/supabase/client';
 import { v4 as uuidv4 } from 'uuid';
 import { Task, TaskSession } from '@/types';
+import { endOfDay, formatISO, startOfDay } from 'date-fns';
 
 const supabase = createClient();
 
@@ -52,9 +53,17 @@ export const deleteTask = async (id: string) => {
 };
 
 export const startTaskSession = async (taskId: string, userId: string) => {
+  const newSession = {
+    id: uuidv4(),
+    task_id: taskId,
+    user_id: userId,
+    start_time: new Date().toISOString(),
+    end_time: null,
+  };
+
   const { data, error } = await supabase
     .from('task_sessions')
-    .insert({ id: uuidv4(), task_id: taskId, user_id: userId, start_time: new Date().toISOString(), end_time: null })
+    .insert(newSession)
     .select('*')
     .single();
 
@@ -78,7 +87,19 @@ export const endTaskSession = async (sessionId: string) => {
   return data;
 };
 
-export const fetchTasks = async (userId: string) => {
+export const fetchUserTasks = async (): Promise<Task[]> => {
+  const { data: userData } = await supabase.auth.getUser();
+  const userId = userData.user?.id;
+
+  if (userId) {
+    const tasks = await fetchTasks(userId);
+    return tasks ?? [];
+  }
+
+  return [];
+};
+
+export const fetchTasks = async (userId: string): Promise<Task[]> => {
   const { data, error } = await supabase
     .from('tasks')
     .select('*')
@@ -87,5 +108,25 @@ export const fetchTasks = async (userId: string) => {
   if (error) {
     console.error('Error fetching tasks:', error);
   } 
-  return data;
+  return data ?? [];
+};
+export const fetchTodayTaskSessions = async (userId: string) => {
+  const start = formatISO(startOfDay(new Date()));
+  const end = formatISO(endOfDay(new Date()));
+
+  const { data, error } = await supabase
+    .from('task_sessions')
+    .select(`
+      *,
+      task:tasks!inner(*)
+    `)
+    .eq('user_id', userId)
+    .gte('start_time', start)
+    .lte('end_time', end)
+    .order('start_time', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching today task sessions:', error);
+  }
+  return data ?? [];
 };
