@@ -5,6 +5,8 @@ import React from 'react';
 import Link from 'next/link';
 import ThemeToggle from '@/components/ThemeToggle';
 import { createClient } from '@/utils/supabase/client';
+import SignOutButton from './SignOutButton';
+import { Sign } from 'crypto';
 
 const Header: React.FC<{}> = () => {
   const supabase = createClient();
@@ -22,6 +24,7 @@ const Header: React.FC<{}> = () => {
         <nav className="flex items-center">
           <Link href="/dashboard" className="btn btn-sm mr-2">Dashboard</Link>
           <Link href="/dashboard/tasks" className="btn btn-sm btn-primary mr-2">Tasks</Link>
+          <SignOutButton />
         </nav>
       </div>
     </header>

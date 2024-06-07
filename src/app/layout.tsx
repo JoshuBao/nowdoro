@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import { TaskProvider } from '@/context/TaskContext';
 import './globals.css';
 import Header from '@/components/Header';
-import { createClient } from '../../test/my-app/utils/supabase/server';
+import { createClient } from '@/utils/supabase/client';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {

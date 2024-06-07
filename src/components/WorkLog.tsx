@@ -47,7 +47,7 @@ const WorkLog: React.FC = () => {
     }, [setTasks]);
 
     return (
-        <div className="p-4 w-1/5">
+        <div className="p-4 w-1/4">
             <h2 className="text-2xl font-bold text-primary mb-4">Today's Work Log</h2>
             <div className="flex text-secondary flex-col">
                 {taskSessions.map((session) => (

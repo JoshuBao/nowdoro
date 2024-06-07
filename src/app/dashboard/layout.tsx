@@ -1,7 +1,7 @@
 // src/app/dashboard/layout.tsx
 import { redirect } from 'next/navigation';
 import React from 'react';
-import { createClient } from '../../../test/my-app/utils/supabase/server';
+import { createClient } from '@/utils/supabase/server';
 
 
 export default async function DashboardLayout({
