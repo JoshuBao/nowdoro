@@ -118,10 +118,7 @@ export const fetchTodayTaskSessions = async (userId: string) => {
 
   const { data, error } = await supabase
     .from('task_sessions')
-    .select(`
-      *,
-      task:tasks(*)
-    `)
+    .select('*, task:tasks(id, name, description)')
     .eq('user_id', userId)
     .gte('start_time', start)
     .lte('end_time', end)
@@ -132,12 +129,32 @@ export const fetchTodayTaskSessions = async (userId: string) => {
   }
   return data ?? [];
 };
-export const subscribeToTaskSessions = (userId: string, callback: (newSession: TaskSession) => void) => {
+export const subscribeToTaskSessions = (userId: string, callback: (newSession: TaskSession & { task: Task }) => void) => {
   const channel = supabase
     .channel(`public:task_sessions:user_id=eq.${userId}`)
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'task_sessions', filter: `user_id=eq.${userId}` }, (payload) => {
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'task_sessions', filter: `user_id=eq.${userId}` }, async (payload) => {
       const newSession: TaskSession = payload.new as TaskSession;
-      callback(newSession);
+
+      // Fetch task details
+      const { data: taskData, error } = await supabase
+        .from('tasks')
+        .select('id, name, description')
+        .eq('id', newSession.task_id)
+        .single();
+
+      if (error) {
+        console.error('Error fetching task details:', error);
+        return;
+      }
+
+      const task: Task = {
+        ...taskData,
+        elapsedTime: 0,
+        isRunning: false,
+        user_id: newSession.user_id,
+      };
+
+      callback({ ...newSession, task });
     })
     .subscribe();
 

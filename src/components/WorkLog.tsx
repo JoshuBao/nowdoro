@@ -1,4 +1,3 @@
-// src/components/WorkLog.tsx
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -11,7 +10,7 @@ import { createClient } from '@/utils/supabase/client';
 const supabase = createClient();
 
 const WorkLog: React.FC = () => {
-  const [taskSessions, setTaskSessions] = useState<TaskSession[]>([]);
+  const [taskSessions, setTaskSessions] = useState<(TaskSession & { task: Task })[]>([]);
   const { tasks, setTasks } = useTasks();
 
   useEffect(() => {
@@ -21,7 +20,7 @@ const WorkLog: React.FC = () => {
         setTasks(userTasks);
         const userId = userTasks[0]?.user_id;
         if (userId) {
-          const sessions: TaskSession[] | null = await fetchTodayTaskSessions(userId);
+          const sessions: (TaskSession & { task: Task })[] | null = await fetchTodayTaskSessions(userId);
           setTaskSessions(sessions ?? []);
 
           const subscription = subscribeToTaskSessions(userId, (newSession) => {
@@ -58,9 +57,8 @@ const WorkLog: React.FC = () => {
                 <span className="text-white font-bold">{format(new Date(session.start_time), 'HH:mm')}</span>
               </div>
               <div className="flex-grow bg-base-200 p-4 rounded-lg shadow">
-                <h3 className="font-bold text-lg">{session.task?.name}</h3>
-                <p className="text-sm">{session.task?.description}</p>
-
+                <h3 className="font-bold text-lg">{session.task.name}</h3>
+                <p className="text-sm">{session.task.description}</p>
                 <p className="text-sm">{`From: ${format(new Date(session.start_time), 'HH:mm')} To: ${session.end_time ? format(new Date(session.end_time), 'HH:mm') : 'Ongoing'}`}</p>
               </div>
             </div>
