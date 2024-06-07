@@ -54,7 +54,7 @@ export const deleteTask = async (id: string) => {
 export const startTaskSession = async (taskId: string, userId: string) => {
   const { data, error } = await supabase
     .from('task_sessions')
-    .insert({ task_id: taskId, user_id: userId, start_time: new Date().toISOString(), end_time: null })
+    .insert({ id: uuidv4(), task_id: taskId, user_id: userId, start_time: new Date().toISOString(), end_time: null })
     .select('*')
     .single();
 

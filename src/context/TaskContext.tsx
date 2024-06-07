@@ -1,4 +1,3 @@
-// src/context/TaskContext.tsx
 'use client';
 
 import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
@@ -16,6 +15,7 @@ interface TaskContextType {
   deleteTask: (id: string) => void;
   startTaskSession: (taskId: string) => void;
   endTaskSession: (sessionId: string) => void;
+  toggleTaskRunning: (taskId: string) => void;
   isOnBreak: boolean;
   breakTime: number;
   startBreak: () => void;
@@ -45,7 +45,7 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
       if (userId) {
         const tasks = await fetchTasks(userId);
-        setTasks(tasks);
+        setTasks(tasks ?? []); // Ensure setTasks always receives an array
       }
     };
 
@@ -93,6 +93,25 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     );
   };
 
+  const toggleTaskRunning = async (taskId: string) => {
+    setTasks((prevTasks) =>
+      prevTasks.map(task =>
+        task.id === taskId ? { ...task, isRunning: !task.isRunning } : task
+      )
+    );
+
+    const task = tasks.find(task => task.id === taskId);
+
+    if (task?.isRunning) {
+      const activeSession = taskSessions.find(session => session.task_id === taskId && !session.end_time);
+      if (activeSession) {
+        await endTaskSession(activeSession.id);
+      }
+    } else {
+      await startTaskSession(taskId);
+    }
+  };
+
   // Effect to handle running timers
   useEffect(() => {
     const interval = setInterval(() => {
@@ -108,7 +127,7 @@ export const TaskProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, []);
 
   return (
-    <TaskContext.Provider value={{ tasks, taskSessions, addTask, updateTask, deleteTask, startTaskSession, endTaskSession, isOnBreak: false, breakTime: 0, startBreak: () => {}, endBreak: () => {} }}>
+    <TaskContext.Provider value={{ tasks, taskSessions, addTask, updateTask, deleteTask, startTaskSession, endTaskSession, toggleTaskRunning, isOnBreak: false, breakTime: 0, startBreak: () => {}, endBreak: () => {} }}>
       {children}
     </TaskContext.Provider>
   );
