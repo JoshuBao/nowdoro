@@ -8,6 +8,7 @@ import SignOutButton from '@/components/SignOutButton';
 import TaskList from '@/components/TaskList';
 import BreakComponent from '@/components/BreakComponent';
 import WorkLog from '@/components/WorkLog';
+import TableSummary from '@/components/TableSummary';
 
 export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
@@ -32,6 +33,7 @@ export default function DashboardPage() {
       <WorkLog />
       <div className="flex flex-col items-center">
         <TaskList />
+        <TableSummary/>
       </div>
       <BreakComponent />
     </div>

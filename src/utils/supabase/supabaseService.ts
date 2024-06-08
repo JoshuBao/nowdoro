@@ -160,3 +160,18 @@ export const subscribeToTaskSessions = (userId: string, callback: (newSession: T
 
   return channel;
 };
+
+export const fetchWeekTaskSessions = async (userId: string, start: string, end: string) => {
+  const { data, error } = await supabase
+    .from('task_sessions')
+    .select('*, task:tasks(id, name, description)')
+    .eq('user_id', userId)
+    .gte('start_time', start)
+    .lte('end_time', end)
+    .order('start_time', { ascending: true });
+
+  if (error) {
+    console.error('Error fetching task sessions for the week:', error);
+  }
+  return data ?? [];
+};
