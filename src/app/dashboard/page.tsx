@@ -4,7 +4,6 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
 import { User } from '@supabase/supabase-js';
-import SignOutButton from '@/components/SignOutButton';
 import TaskList from '@/components/TaskList';
 import BreakComponent from '@/components/BreakComponent';
 import WorkLog from '@/components/WorkLog';

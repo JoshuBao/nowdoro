@@ -1,4 +1,3 @@
-// src/components/TableSummary.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -82,34 +81,34 @@ const TableSummary: React.FC = () => {
         <button className="btn btn-secondary" onClick={handleNextWeek}>Next Week</button>
         <button className="btn btn-primary" onClick={handleCurrentWeek}>Current Week</button>
       </div>
-      {loading ? (
-        <div className="flex justify-center">
-          <div className="loader">Loading...</div>
-        </div>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="table w-full text-neutral">
-            <thead>
+      <div className="overflow-x-auto">
+        <table className="table w-full text-neutral">
+          <thead>
+            <tr>
+              <th>Task</th>
+              {weekDays.map((date, index) => (
+                <th key={index}>{format(date, 'EEE')}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {loading ? (
               <tr>
-                <th>Task</th>
-                {weekDays.map((date, index) => (
-                  <th key={index}>{format(date, 'EEE')}</th>
-                ))}
+                <td colSpan={weekDays.length + 1} className="text-center">Loading...</td>
               </tr>
-            </thead>
-            <tbody>
-              {tasks.map(task => (
+            ) : (
+              tasks.map(task => (
                 <tr key={task.id}>
                   <td>{task.name}</td>
                   {weekDays.map((date, index) => (
                     <td key={index}>{getTotalTimeForTask(task.id, date)}</td>
                   ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

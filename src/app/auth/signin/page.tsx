@@ -28,6 +28,7 @@ export default function SignInPage() {
       email,
       options: {
         emailRedirectTo: `http://localhost:3000/auth/callback`,
+        shouldCreateUser: false,
       },
     });
 
@@ -42,7 +43,7 @@ export default function SignInPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-base-200">
       <div className="w-full max-w-md p-8 space-y-6 bg-base-100 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold text-center text-primary">Sign In / Sign Up</h2>
+        <h2 className="text-2xl font-bold text-center text-primary">Sign In</h2>
         {emailSent ? (
           <div className="text-center">
             <p className="text-success">Magic link sent to {email}. Check your email to sign in.</p>
