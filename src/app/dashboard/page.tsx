@@ -29,13 +29,13 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-row justify-between">
+    <div className="min-h-screen flex flex-row ">
       <WorkLog />
       <div className="flex flex-col items-center">
+        <TableSummary />
         <TaskList />
-        <TableSummary/>
       </div>
-      <BreakComponent />
+      {/* <BreakComponent /> */}
     </div>
   )
 }
