@@ -1,4 +1,4 @@
-// src/app/payment/success/page.tsx
+// src/app/checkout/success/page.tsx
 
 export default function SuccessPage() {
   return (

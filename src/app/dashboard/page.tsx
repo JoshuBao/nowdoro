@@ -30,7 +30,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen flex flex-row ">
       <WorkLog />
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center ">
         <TableSummary />
         <TaskList />
       </div>

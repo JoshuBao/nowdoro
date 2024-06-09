@@ -74,7 +74,7 @@ const TableSummary: React.FC = () => {
   };
 
   return (
-    <div className="p-4 bg-base-300 shadow-md my-4">
+    <div className="p-4 bg-base-300 shadow-md w-full my-4">
       <div className="flex justify-between items-center mb-4">
         <button className="btn btn-secondary" onClick={handlePreviousWeek}>Previous Week</button>
         <h2 className="text-2xl font-bold text-primary">Week of {format(startOfWeek(currentWeek, { weekStartsOn: 0 }), 'MMMM d, yyyy')}</h2>
