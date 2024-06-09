@@ -44,6 +44,7 @@ const LandingPage: React.FC = () => {
             <li><button onClick={(e) => handleClick(e, '#why')}>Why</button></li>
             <li><button onClick={(e) => handleClick(e, '#solution')}>Solution</button></li>
             <li><button onClick={(e) => handleClick(e, '#pricing')}>Pricing</button></li>
+            <li><button onClick={(e) => handleClick(e, '#faq')}>FAQ</button></li>
             <li><a href="mailto:mg@jazzbar.ai" className="">Support</a></li>
           </ul>
         </div>
@@ -140,7 +141,80 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
         </section>
+        <section id="faq">
+          <div className="hero min-h-screen bg-base-200 py-4">
+            <div className="hero-content flex flex-col lg:flex-row text-neutral ">
+              <div className="w-full lg:w-1/2">
+                <h3 className="text-left text-success font-bold">FAQ</h3>
+                <h2 className="text-7xl font-bold text-primary text-center lg:text-left">Frequently Asked <br />Questions</h2>
+              </div>
+              <div className="w-full lg:w-1/2 text-left">
+                <div className="collapse collapse-plus bg-base-200 w-full">
+                  <input type="checkbox" name="my-accordion-3" />
+                  <div className="collapse-title text-xl font-medium">
+                    What is Nowdoro?
+                  </div>
+                  <div className="collapse-content">
+                    <p>Nowdoro is a simple and effective productivity tool designed to help you track your tasks and manage your time efficiently.</p>
+                  </div>
+                </div>
+                <div className="collapse collapse-plus bg-base-200 w-full">
+                  <input type="checkbox" name="my-accordion-3" />
+                  <div className="collapse-title text-xl font-medium">
+                    How does Nowdoro help with anticipatory anxiety?
+                  </div>
+                  <div className="collapse-content">
+                    <p>By providing a structured approach to task management, Nowdoro helps you organize your interests and goals, reducing the chaos and confusion that contribute to anticipatory anxiety.</p>
+                  </div>
+                </div>
+                <div className="collapse collapse-plus bg-base-200 w-full">
+                  <input type="checkbox" name="my-accordion-3" />
+                  <div className="collapse-title text-xl font-medium">
+                    What features does Nowdoro offer?
+                  </div>
+                  <div className="collapse-content">
+                    <p>Nowdoro offers task tracking and management, detailed time logging for each task, weekly and monthly productivity reports, and 24/7 customer support.</p>
+                  </div>
+                </div>
+                <div className="collapse collapse-plus bg-base-200 w-full">
+                  <input type="checkbox" name="my-accordion-3" />
+                  <div className="collapse-title text-xl font-medium">
+                    How much does Nowdoro cost?
+                  </div>
+                  <div className="collapse-content">
+                    <p>Nowdoro is available for a one-time payment of $10, providing lifetime access to all its features and updates.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+      <footer className="footer p-10 bg-base-300 text-base-content flex justify-between">
+        <div className="">
+        <p>Created by jazzbar.ai</p>
+        </div>
+        <nav className="flex">
+          {/* <h6 className="footer-title">Links</h6> */}
+          <a onClick={(e) => handleClick(e, '#why')} className="link link-hover">Why</a>
+          <a onClick={(e) => handleClick(e, '#solution')} className="link link-hover">Solution</a>
+          <a onClick={(e) => handleClick(e, '#pricing')} className="link link-hover">Pricing</a>
+          <a onClick={(e) => handleClick(e, '#faq')} className="link link-hover">FAQ</a>
+        </nav>
+        {/* <nav>
+          <h6 className="footer-title">Company</h6>
+          <a className="link link-hover">About us</a>
+          <a className="link link-hover">Contact</a>
+          <a className="link link-hover">Jobs</a>
+          <a className="link link-hover">Press kit</a>
+        </nav> */}
+        {/* <nav>
+          <h6 className="footer-title">Legal</h6>
+          <a className="link link-hover">Terms of use</a>
+          <a className="link link-hover">Privacy policy</a>
+          <a className="link link-hover">Cookie policy</a>
+        </nav> */}
+      </footer>
     </div>
   );
 };
