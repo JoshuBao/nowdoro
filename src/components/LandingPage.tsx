@@ -61,7 +61,7 @@ const LandingPage: React.FC = () => {
             <div className="hero-content text-center text-neutral-content flex flex-col justify-center items-center w-full px-4 lg:px-0">
               <div className="max-w-md">
                 <p className="py-6 text-sm font-semibold">A SIMPLE AND EFFECTIVE PRODUCTIVITY TOOL</p>
-                <h1 className="text-4xl lg:text-8xl text-left font-bold">No More<br /> Messy <br /> Productivity Tables</h1>
+                <h1 className="text-4xl lg:text-8xl text-left font-bold">No More<br /> Messy <br /> Productivity <br /> Tables</h1>
                 <p className="py-6 text-lg">Track your tasks and manage your time efficiently.</p>
                 <Link href="/auth/signin" className="btn border border-primary border-2 rounded-full">Sign In</Link>
               </div>
