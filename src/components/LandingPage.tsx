@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const handleClick = (e: React.MouseEvent, href: string) => {
   e.preventDefault();
@@ -78,7 +79,13 @@ const LandingPage: React.FC = () => {
                 </p>
                 <button className="btn border border-primary border-4 rounded-full" onClick={(e) => handleClick(e, '#solution')}>What&lsquo;s the solution?</button>
               </div>
-              <img src="/avoid.png" className="max-w-4xl border border-error border-4 rounded-3xl shadow-2xl" />
+              <Image
+                src="/avoid.png"
+                alt="Avoid Image"
+                width={2402}
+                height={1378}
+                className="max-w-4xl border border-error border-4 rounded-3xl shadow-2xl"
+              />
             </div>
           </div>
         </section>
@@ -86,7 +93,13 @@ const LandingPage: React.FC = () => {
         <section id="solution">
           <div className="hero min-h-screen bg-base-300">
             <div className="hero-content flex-col lg:flex-row-reverse">
-              <img src="/mockup.png" className="max-w-4xl rounded-3xl border border-4 border-accent shadow-2xl" />
+              <Image
+                src="/mockup.png"
+                alt="Mockup Image"
+                width={1526}
+                height={862}
+                className="max-w-4xl rounded-3xl border border-4 border-accent shadow-2xl"
+              />
               <div>
                 <h1 className="text-5xl font-bold text-primary text-left">Streamlined Productivity: Unleash Your Potential</h1>
                 <p className="py-6 text-left text-base-content">

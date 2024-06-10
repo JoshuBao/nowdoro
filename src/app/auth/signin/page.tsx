@@ -19,7 +19,7 @@ export default function SignInPage() {
       }
     };
     fetchUser();
-  }, []);
+  }, [supabase.auth]);
 
   const handleCheckout = async () => {
     setLoading(true);
