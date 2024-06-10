@@ -76,7 +76,7 @@ const LandingPage: React.FC = () => {
                 <p className="py-6 text-base-content text-left">
                   Juggling multiple interests without a clear plan is a recipe for overwhelming confusion, wasted time, and unfinished goals.
                 </p>
-                <button className="btn border border-primary border-4 rounded-full" onClick={(e) => handleClick(e, '#solution')}>What's the solution?</button>
+                <button className="btn border border-primary border-4 rounded-full" onClick={(e) => handleClick(e, '#solution')}>What&lsquo;s the solution?</button>
               </div>
               <img src="/avoid.png" className="max-w-4xl border border-error border-4 rounded-3xl shadow-2xl" />
             </div>
@@ -90,7 +90,7 @@ const LandingPage: React.FC = () => {
               <div>
                 <h1 className="text-5xl font-bold text-primary text-left">Streamlined Productivity: Unleash Your Potential</h1>
                 <p className="py-6 text-left text-base-content">
-                  Nowdoro's intuitive task management system effortlessly aligns your diverse passions, allowing you to thrive in a state of focused productivity.
+                  Nowdoro&lsquo;s intuitive task management system effortlessly aligns your diverse passions, allowing you to thrive in a state of focused productivity.
                 </p>
                 <button className="btn border border-primary border-4 rounded-full" onClick={(e) => handleClick(e, '#pricing')}>Get Started</button>
               </div>
@@ -140,7 +140,7 @@ const LandingPage: React.FC = () => {
                         24/7 customer support
                       </li> */}
                     </ul>
-                    <p className="text-base-content text-left text-lg mt-4">Don't miss out on this incredible offer. Improve your productivity and take control of your time today with Nowdoro!</p>
+                    <p className="text-base-content text-left text-lg mt-4">Don&lsquo;t miss out on this incredible offer. Improve your productivity and take control of your time today with Nowdoro!</p>
                     <button className="btn  mt-4 w-auto rounded-full mx-auto" onClick={handleCheckout}>{loading ? 'Loading...' : 'Buy Now for $9'}</button>                  </div>
                 </div>
               </div>
