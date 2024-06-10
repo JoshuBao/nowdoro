@@ -37,7 +37,7 @@ const LandingPage: React.FC = () => {
     <div>
       <div className="navbar bg-base-300 shadow-lg">
         <div className="navbar-start">
-          <a href="./" className="ml-8 btn btn-ghost text-xl text-primary">Nowdoro</a>
+          <a href="./" className="ml-8 btn btn-ghost text-xl text-primary">N O W D O R O</a>
         </div>
         <div className="navbar-center hidden lg:flex text-neutral">
           <ul className="menu menu-horizontal px-1 font-semibold">
