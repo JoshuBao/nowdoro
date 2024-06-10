@@ -25,18 +25,18 @@ export async function POST(req: NextRequest) {
     const email = session.customer_details?.email;
 
     try {
-        const { error } = await supabase.auth.signInWithOtp({
-            email: email ?? '',
-            options: {
-                emailRedirectTo: `http://localhost:3000/auth/callback`,
-            },
-        });
+      const { error } = await supabase.auth.signInWithOtp({
+        email: email ?? '',
+        options: {
+          emailRedirectTo: `http://${process.env.NEXT_PUBLIC_DOMAIN}/auth/callback`,
+        },
+      });
 
-        if (error) {
-            throw error;
-        }
+      if (error) {
+        throw error;
+      }
 
-        console.log(`Magic link sent to ${email}`);
+      console.log(`Magic link sent to ${email}`);
     } catch (err) {
       console.error(`Error sending magic link to ${email}:`, err);
     }

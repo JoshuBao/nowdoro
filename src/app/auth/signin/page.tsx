@@ -44,7 +44,7 @@ export default function SignInPage() {
     const { data, error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `http://localhost:3000/auth/callback`,
+        emailRedirectTo: `http://${process.env.NEXT_PUBLIC_DOMAIN}/auth/callback`, 
         shouldCreateUser: false,
       },
     });
