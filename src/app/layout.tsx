@@ -4,7 +4,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Task Time Tracker',
+  title: 'Nowdoro',
   description: 'Manage your tasks efficiently',
 };
 
