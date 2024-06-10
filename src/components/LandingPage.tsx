@@ -114,15 +114,18 @@ const LandingPage: React.FC = () => {
         <section id="pricing">
           <div className="hero min-h-screen bg-base-100">
             <div className="hero-content text-center flex flex-col justify-center items-center w-full px-4 lg:px-0">
-              <div className="flex flex-col items-center ">
-                <h2 className="text-2xl sm:text-4xl lg:text-7xl font-bold text-primary mb-4 w-max ">Lifetime Access to Nowdoro for Only $9!</h2>
-                <p className="text-sm sm:text-lg text-secondary max-w-lg mb-4 text-center">Unlock the full potential of Nowdoro with a one-time payment of $9. Enjoy a lifetime of productivity enhancements and peace of mind.</p>
+              <div className="flex flex-col items-center">
+                <h2 className="text-2xl sm:text-4xl lg:text-7xl font-bold text-primary mb-4 w-max">
+                  Lifetime Access to Nowdoro for Only $9!
+                </h2>
+                <p className="text-sm sm:text-lg text-secondary max-w-lg mb-4 text-center">
+                  Unlock the full potential of Nowdoro with a one-time payment of $9. Enjoy a lifetime of productivity enhancements and peace of mind.
+                </p>
                 <div className="card bg-base-300 max-w-lg shadow-xl rounded-3xl mx-auto p-4 border border-warning border-4">
-                  <div className="card-body rounded-3xl text-base-content ">
-
+                  <div className="card-body rounded-3xl text-base-content">
                     <h3 className="text-xl sm:text-2xl font-bold text-left text-primary">Features:</h3>
-                    <ul className="list-inside text-left text-base-content space-y-4 ">
-                      <li className="flex items-center ">
+                    <ul className="list-inside text-left text-base-content space-y-4">
+                      <li className="flex items-center">
                         <div className="text-lg line-through font-semibold text-gray-500 mr-2">$18</div>
                         <div className="text-2xl sm:text-4xl font-bold text-black">$9</div>
                       </li>
@@ -147,14 +150,17 @@ const LandingPage: React.FC = () => {
                         Weekly and monthly productivity reports
                       </li>
                     </ul>
-                    <p className="text-base-content text-left text-sm sm:text-lg mt-4">Don&lsquo;t miss out on this incredible offer. Improve your productivity and take control of your time today with Nowdoro!</p>
-                    <button className="btn  mt-4 w-auto rounded-full mx-auto" onClick={handleCheckout}>{loading ? 'Loading...' : 'Buy Now for $9'}</button>
+                    <p className="text-base-content text-left text-sm sm:text-lg mt-4">
+                      Don&lsquo;t miss out on this incredible offer. Improve your productivity and take control of your time today with Nowdoro!
+                    </p>
+                    <button className="btn mt-4 w-auto rounded-full mx-auto" onClick={handleCheckout}>{loading ? 'Loading...' : 'Buy Now for $9'}</button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
         <section id="faq">
           <div className="hero min-h-screen bg-base-200 py-4">
             <div className="hero-content flex flex-col lg:flex-row text-neutral">
