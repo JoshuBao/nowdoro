@@ -115,13 +115,14 @@ const LandingPage: React.FC = () => {
           <div className="hero min-h-screen bg-base-100">
             <div className="hero-content text-center flex flex-col justify-center items-center w-full px-4 lg:px-0">
               <div className="flex flex-col items-center">
-                <h2 className="text-2xl sm:text-4xl lg:text-7xl font-bold text-primary mb-4 w-max">
+                <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold text-primary mb-4 w-full sm:w-auto">
                   Lifetime Access to Nowdoro for Only $9!
                 </h2>
-                <p className="text-sm sm:text-lg text-secondary max-w-lg mb-4 text-center">
+                <p className="text-xs sm:text-sm lg:text-lg text-secondary w-full sm:max-w-lg mb-4 text-center">
                   Unlock the full potential of Nowdoro with a one-time payment of $9. Enjoy a lifetime of productivity enhancements and peace of mind.
                 </p>
-                <div className="card bg-base-300 max-w-lg shadow-xl rounded-3xl mx-auto p-4 border border-warning border-4">
+
+                <div className="card bg-base-300 max-w-full sm:max-w-lg shadow-xl rounded-3xl mx-auto p-4 border border-warning border-4">
                   <div className="card-body rounded-3xl text-base-content">
                     <h3 className="text-xl sm:text-2xl font-bold text-left text-primary">Features:</h3>
                     <ul className="list-inside text-left text-base-content space-y-4">
@@ -156,6 +157,7 @@ const LandingPage: React.FC = () => {
                     <button className="btn mt-4 w-auto rounded-full mx-auto" onClick={handleCheckout}>{loading ? 'Loading...' : 'Buy Now for $9'}</button>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
