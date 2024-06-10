@@ -45,7 +45,7 @@ const LandingPage: React.FC = () => {
             <li><button onClick={(e) => handleClick(e, '#solution')}>Solution</button></li>
             <li><button onClick={(e) => handleClick(e, '#pricing')}>Pricing</button></li>
             <li><button onClick={(e) => handleClick(e, '#faq')}>FAQ</button></li>
-            <li><a href="mailto:mg@jazzbar.ai" className="">Support</a></li>
+            <li><a href="mailto:joshuacheng888@gmail.com?subject=Nowdoro Support" className="">Support</a></li>
           </ul>
         </div>
         <div className="navbar-end">
