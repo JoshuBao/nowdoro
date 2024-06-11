@@ -18,12 +18,12 @@ export async function POST(req: NextRequest) {
           quantity: 1,
         },
 
-      ],
-      discounts: [
+      ], discounts: [
         {
-          promotion_code: 'PRODUCTIVITY',
+          coupon: 'eCWMtPdB',
         },
       ],
+     
       allow_promotion_codes: true,
       mode: 'payment',
 
