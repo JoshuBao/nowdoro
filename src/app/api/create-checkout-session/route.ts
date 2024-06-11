@@ -14,10 +14,13 @@ export async function POST(req: NextRequest) {
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
-          price: 'price_1PQE07FZFIYMWb7QKj0SRt8w',
+          price: 'price_1PQIPZFZFIYMWb7QukiL1jpN',
           quantity: 1,
         },
-      ],
+
+      ], discounts: [{
+        coupon: 'eCWMtPdB',
+      }],
       mode: 'payment',
       success_url: `${YOUR_DOMAIN}/checkout/success`,
       cancel_url: `${YOUR_DOMAIN}`,
