@@ -19,6 +19,11 @@ export async function POST(req: NextRequest) {
         },
 
       ],
+      discounts: [
+        {
+          promotion_code: 'eCWMtPdB',
+        },
+      ],
       allow_promotion_codes: true,
       mode: 'payment',
 
