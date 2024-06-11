@@ -19,6 +19,7 @@ export async function POST(req: NextRequest) {
         },
 
       ],
+      allow_promotion_codes: true,
       mode: 'payment',
 
       success_url: `${YOUR_DOMAIN}/checkout/success`,
