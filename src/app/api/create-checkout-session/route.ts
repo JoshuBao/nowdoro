@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
       ],
       discounts: [
         {
-          promotion_code: 'eCWMtPdB',
+          coupon: 'eCWMtPdB',
         },
       ],
       allow_promotion_codes: true,
