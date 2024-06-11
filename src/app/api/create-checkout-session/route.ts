@@ -20,12 +20,12 @@ export async function POST(req: NextRequest) {
 
       ], discounts: [
         {
-          coupon: 'eCWMtPdB',
+          // coupon: 'eCWMtPdB',
         },
       ],
      
       mode: 'payment',
-
+      allow_promotion_codes: true,
       success_url: `${YOUR_DOMAIN}/checkout/success`,
       cancel_url: `${YOUR_DOMAIN}`,
     });
