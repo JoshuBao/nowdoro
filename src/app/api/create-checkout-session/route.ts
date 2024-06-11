@@ -21,6 +21,7 @@ export async function POST(req: NextRequest) {
       ], discounts: [{
         coupon: 'eCWMtPdB',
       }],
+      allow_promotion_codes: true,
       mode: 'payment',
       success_url: `${YOUR_DOMAIN}/checkout/success`,
       cancel_url: `${YOUR_DOMAIN}`,
